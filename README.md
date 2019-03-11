@@ -13,7 +13,7 @@ I would also normally recommend some kind of authentication / key be used. I mig
 
 I did, however add one small requirement to your test this that all endpoints require HTTPS to be used. Hopefully this is acceptable.
 
-As my solution is deployed on AWS I have also supplied CloudFormation templates and appropriate bootstrap scripts so that the solution can be launched simply by creating a Stack. Just note that this was also a “quick” solution. There are many possible improvements to this such as Puppet rather than my BASH scripting. However, I needed a quick solution that would launch with a few clicks and one that did not rely on any previous infrastructure or workflow.
+As my solution is deployed on AWS I have also supplied CloudFormation templates and appropriate bootstrap scripts so that the solution can be launched simply by creating a Stack. Just note that this was also a “quick” solution. There are many possible improvements to this such as Puppet rather than my BASH scripting. Also maybe use nginx rther than Apache. That seems like what all the kids are doing today. However, for this deployment I needed a quick solution that would launch with a few clicks and one that did not rely on any previous infrastructure or workflow.
 
 Because I’m a cheapskate, my hosted database uses Aurora Server-less. Just note that the first time you “hit” an API endpoint it can take about 15-30 seconds to warm up. This wouldn't be the case in a live environemtn where we either wouldn't use Serverless or the application would receve enough traffic such that it remains warm.
 
