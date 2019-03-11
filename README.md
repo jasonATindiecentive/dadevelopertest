@@ -2,6 +2,8 @@
 Developer Test for D &amp; A Technologies
 
 Jason Ruddock
+bjruddock@gmail.com
+(973) 714-7249
 
 This is a developer test solution for D&A Technologies. The file Backend Developer Test.pdf can be found in the /documents folder which details the requirements for this solution.
 
