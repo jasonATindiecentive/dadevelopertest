@@ -102,8 +102,6 @@ Header: Authorization Bearer {token from /auth}
 Raw Body:
 { “email”: “info@datatechnologies.com”,”password”:”Test123”}
 ```
-- Use off the shelf libraries or a framework
-
 
 #### Consider DynamoDB 
 
