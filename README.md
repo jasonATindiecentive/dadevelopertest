@@ -47,7 +47,7 @@ For example I could envision a future version of this that, rather than having t
 
 #### Timezones are ignored
 
-The API has no concept of which timezone the user may be in. All times are returned in GMT. Perhaps a user signing up should supply their timezone or location so times can be converted.
+The API has no concept of which timezone the user may be in. All times are returned in GMT. Perhaps a user signing up should supply their timezone or location so times can be converted in the reply.
 
 ... or, perhaps this is a non-issue and would be handled on the client side.
 
@@ -62,6 +62,8 @@ Each API request should be logged. You could simply insert rows into some `Log` 
 Anyone can view everyone else's messages as well as a list of all other users. Anyone can send a message from and to any user because "POST send_messages.php" does not authenticate whether someone has actually logged in.
 
 There are a number of options here. Each endpoint could be sucured using Basic Auth, Digest Auth, or OAuth. Or perhaps the "POST /login" response should include a token that can be used on subsequent calls to ensure the user can only see messages and send using their own account.
+
+Finally all calls should require HTTPS (but this was already mentiond above.)
 
 
 #### Use UUIDs for “user_id”
