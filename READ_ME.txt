@@ -13,7 +13,21 @@ The endpoints can be found live at: https://datechdev.jasonruddock.com/api/
 
 For example, https://datechdev.jasonruddock.com/api/list_all_users.php?requester_user_id=1
 
-All errors return HTTP 500 plus an code and description. Possible errors are: 000 Internal Server Error 100 Method not allowed 200 Email Address is not Valid 201 Password is empty 202 First Name is required 203 Last Name is required 204 User Already Exists 102 Invalid Login 103 user_id_X was not found 105 sender_user_id was not found 106 receiver_user_id was not found 107 requester_user_id was not found
+All errors return HTTP 500 plus an code and description.
+
+Possible errors are:
+000 Internal Server Error
+100 Method not allowed
+200 Email Address is not Valid
+201 Password is empty
+202 First Name is required
+203 Last Name is required
+204 User Already Exists
+102 Invalid Login
+103 user_id_X was not found
+105 sender_user_id was not found
+106 receiver_user_id was not found
+107 requester_user_id was not found
 
 My steps were as follows:
 
@@ -36,8 +50,6 @@ Use a pre-existing library or framework such as CI or Laravel
 These either have built in REST servers or libraries are readily available. Even if a framework is not used then there are also available straight PHP libraries that could be utilized.
 
 When you try to add functionality such as more integrations, emails, jobs, etc. then a framework or at least libraries may come in quite useful.
-
-For example I could envision a future version of this that, rather than having the 'send_messages.php' endpoint insert into the database inline it would queue the request and have a worker process pull them off the queue and handle the processing. If someone hasn't read their messasges in, say, a few days, maybe we would send an email to that user. We might send welcome emails, etc. etc.
 
 Timezones are ignored
 The API has no concept of which timezone the user may be in. All times are returned in GMT. Perhaps a user signing up should supply their timezone or location so times can be converted in the reply.
