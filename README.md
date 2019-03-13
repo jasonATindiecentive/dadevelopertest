@@ -50,8 +50,6 @@ Anyone can view everyone else's messages as well as a list of all other users. A
 
 There are a number of options here. Each endpoint could be sucured using Basic Auth, Digest Auth, or OAuth. Or perhaps the "POST /login" response should include a token that can be used on subsequent calls to ensure the user can only see messages and send using their own account.
 
-Finally all calls should require HTTPS (but this was already mentiond above.)
-
 
 #### Use HTTPS instead of HTTP
 
