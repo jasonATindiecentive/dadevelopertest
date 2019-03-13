@@ -63,5 +63,7 @@ Body:
 Even without using a framework some improvement can be made to this codebase to add basic routing controllers that would make it much easier to add additional methods.
 
 
-### For a high traffic environment, consider DynamoDB (or other non-SQL database) rather than MySQL. This seems like a good fit for this because even if there are millions of users, each User would generally have a limited number of messages sent to and from other users. This would vertically scale nicely and could support a virtually unlimited amount of traffic.
+### Consider DynamoDB 
+
+Considuer using DynamoDB (or other non-SQL database) rather than MySQL. This seems like a good fit for this because even if there are millions of users, each User would generally have a limited number of messages sent to and from other users. This would vertically scale nicely and could support a virtually unlimited amount of traffic.
 
