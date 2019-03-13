@@ -114,7 +114,7 @@ class clsApi {
         $r->first_name = $first_name;
         $r->last_name = $last_name;
 
-        $this->log("register", "{$email}, ********, {$first_name}, {$last_name}", $r);
+        $this->log("register", NULL, $r);
 
         return json_encode($r);
     }
@@ -170,7 +170,7 @@ class clsApi {
         }
 
 
-        $this->log("login", "{$email}, ********", $r);
+        $this->log("login", NULL, $r);
 
 
         return json_encode($r);
@@ -235,7 +235,7 @@ class clsApi {
             throw new clsApiError(500, "000", "Internal Server Error");
         }
 
-        $this->log("view_messages", "{$user_id_a}, {$user_id_b}", $r);
+        $this->log("view_messages", NULL, $r);
 
         // success
         return json_encode($r);
@@ -292,7 +292,7 @@ class clsApi {
         $r->success_title = "Message Sent";
         $r->success_message = "Message was sent succesfully";
 
-        $this->log("send_message", "{$sender_user_id}, {$receiver_user_id}, {$message}", $r);
+        $this->log("send_message", NULL, $r);
 
         return json_encode($r);
     }
@@ -351,7 +351,7 @@ class clsApi {
         } catch (Exception $e) {
             throw new clsApiError(500, "000", "Internal Server Error");
         }
-        $this->log("lsit_all_users", $requester_user_id, $r);
+        $this->log("list_all_users", NULL, $r);
         return json_encode($r);
     }
 
@@ -396,9 +396,18 @@ class clsApi {
      *
      *
      */
-    protected function log($method, $request, $reply, $ip = NULL) {
+    protected function log($method, $request = NULL, $reply, $ip = NULL) {
 
         if (is_object($reply)) $reply = json_encode($reply);
+        if ($request === NULL) {
+            if ($_SERVER['REQUEST_METHOD']  == 'GET') {
+                $request = json_encode($_GET);
+            } else if ($_SERVER['REQUEST_METHOD']  == 'POST') {
+                $r = $_POST;
+                if (isset($r['password'])) $r['password'] = "*******";
+                $request = json_encode($r);
+            }
+        }
 
         // if IP was not passed in then determine it
         if ($ip === NULL) {
