@@ -95,3 +95,5 @@ There are many other things that are probably missing from this API such as the 
 
 Microservices such as this could also be implemented serverless using AWS API Gateway and Lamba, but then using PHP may not be an option and, again, you become locked to AWS.
 
+This was quite an interesting test and one I haven't seen before. It was fun setting this up and quite interesting to do without any framework or libraries.
+
