@@ -14,7 +14,7 @@ My steps were as follows:
 - Create tables using command console
 - Write code using PHP Storm and FTPing into my Dev Instance
 - Set up git repository, deployment keys
-- Write CloudFormation template to launch environment. The CF templates launches a VPC, Aurora Instance, ALB with HTTPS certificate, and CloudFront distribution.
+
 
 I spent about 2 hours writing the code with the remainder of the time setting up the DEV environment and writing CF templates.
 
