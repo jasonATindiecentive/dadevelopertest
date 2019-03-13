@@ -37,7 +37,9 @@ For example, on the current version of this API one could simply call “list_al
  If access to the API were restricted to only authorized users who were issued credentials then this could be avoided.
 
 
-### It’s better to use UUIDs for “user_id” rather than simply a auto incrementing number that is easy for someone to guess.
+### Use UUIDs for “user_id”
+
+... rather than simply a auto incrementing number that is easy for someone to guess.
 
 ### If I were designing this API I would:
 
