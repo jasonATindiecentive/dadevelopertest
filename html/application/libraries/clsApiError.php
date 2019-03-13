@@ -30,7 +30,7 @@ class clsApiError extends \Exception {
 
     public function __construct($http_code = 500, $api_code, $message) {
         $this->http_code = $http_code;
-        $this->api_code = $http_code;
+        $this->api_code = $api_code;
         $this->message = $message;
     }
 

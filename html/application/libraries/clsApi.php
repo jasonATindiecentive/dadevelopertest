@@ -74,13 +74,13 @@ class clsApi {
         $hash = PW_HASH;
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL))
-            throw new clsApiError(500, "Error", "Email address is not valid");
+            throw new clsApiError(500, "200", "Email address is not valid");
         if (strlen(trim($password)) == 0)
-            throw new clsApiError(500, "Error", "Password is empty");
+            throw new clsApiError(500, "201", "Password is empty");
         if (strlen(trim($first_name)) == 0)
-            throw new clsApiError(500, "Error", "First Name is required");
+            throw new clsApiError(500, "202", "First Name is required");
         if (strlen(trim($last_name)) == 0)
-            throw new clsApiError(500, "Error", "Last Name is required");
+            throw new clsApiError(500, "203", "Last Name is required");
 
         try {
             // does user with this email already exists?
@@ -91,7 +91,7 @@ class clsApi {
             $stmt->execute();
             $rows = $stmt->get_result();
             if ($rows->num_rows > 0) {
-                throw new clsApiError(500, "Error", "User Already Exists");
+                throw new clsApiError(500, "204", "User Already Exists");
             }
 
             // add this user
@@ -113,6 +113,8 @@ class clsApi {
         $r->email = $email;
         $r->first_name = $first_name;
         $r->last_name = $last_name;
+
+        $this->log("register", "{$email}, ********, {$first_name}, {$last_name}", $r);
 
         return json_encode($r);
     }
@@ -167,6 +169,10 @@ class clsApi {
             throw new clsApiError(500, "000", "Internal Server Error");
         }
 
+
+        $this->log("login", "{$email}, ********", $r);
+
+
         return json_encode($r);
     }
 
@@ -199,10 +205,14 @@ class clsApi {
                 throw new clsApiError(500, "103", "user_id_1 was not found");
             $check = $this->getUser($user_id_b);
             if ($check === NULL)
-                throw new clsApiError(500, "104", "user_id_2 was not found");
+                throw new clsApiError(500, "103", "user_id_2 was not found");
 
             // all good, send the message
-            $sql = "SELECT * FROM `Message` WHERE 
+            $sql = "SELECT
+                        *,
+                        UNIX_TIMESTAMP(ts) as epoch
+                        
+                        FROM `Message` WHERE 
                       fromUser_idUser = ? AND
                       toUser_idUser = ?
             ";
@@ -216,7 +226,7 @@ class clsApi {
                 $o->message_id = $user['idMessage'];
                 $o->sender_user_id = $user['fromUser_idUser'];
                 $o->message = $user['message'];
-                $o->epoch = $user['ts'];
+                $o->epoch = $user['epoch'];
 
                 $r->messages[] = $o; // add to return array of objects
             }
@@ -224,6 +234,8 @@ class clsApi {
         } catch (Exception $e) {
             throw new clsApiError(500, "000", "Internal Server Error");
         }
+
+        $this->log("view_messages", "{$user_id_a}, {$user_id_b}", $r);
 
         // success
         return json_encode($r);
@@ -279,6 +291,8 @@ class clsApi {
         $r->success_code = 200;
         $r->success_title = "Message Sent";
         $r->success_message = "Message was sent succesfully";
+
+        $this->log("send_message", "{$sender_user_id}, {$receiver_user_id}, {$message}", $r);
 
         return json_encode($r);
     }
@@ -337,6 +351,7 @@ class clsApi {
         } catch (Exception $e) {
             throw new clsApiError(500, "000", "Internal Server Error");
         }
+        $this->log("lsit_all_users", $requester_user_id, $r);
         return json_encode($r);
     }
 
@@ -364,6 +379,39 @@ class clsApi {
         } catch (Exception $e) {
             throw new clsApiError(500, "000", "Internal Server Error");
         }
+
         return json_encode($r);
+    }
+
+    /*
+     *
+     * Add log entries
+     *
+     * @param int   idUser
+     * @param string   request
+     * @param string   reply
+     * @return array fields from User table or NULL if isUser is not found
+     *
+     */
+    protected function log($method, $request, $reply) {
+        if (is_object($reply)) $reply = json_encode($reply);
+        try {
+            $sql = "
+                INSERT INTO `Log` SET  
+                  idUser = ?,
+                  method = ?,
+                  request = ?,
+                  reply = ?,
+                  ts = NOW()
+            ";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bind_param("isss", $idUser, $method, $request, $reply);
+            $stmt->execute();
+
+            // TODO: expire old log entries?
+
+        } catch (Exception $e) {
+            throw new clsApiError(500, "000", "Internal Server Error");
+        }
     }
 }
