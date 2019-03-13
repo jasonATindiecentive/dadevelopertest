@@ -44,6 +44,14 @@ I spent about 3 hours writing the code and testing with the remainder of the tim
 
 Some issues with structure and security that I came across are as follows:
 
+#### The API lacks security
+
+Anyone can view everyone else's messages as well as a list of all other users. Anyone can send a message from and to any user because "POST send_messages.php" does not authenticate whether someone has actually logged in.
+
+There are a number of options here. Each endpoint could be sucured using Basic Auth, Digest Auth, or OAuth. Or perhaps the "POST /login" response should include a token that can be used on subsequent calls to ensure the user can only see messages and send using their own account.
+
+Finally all calls should require HTTPS (but this was already mentiond above.)
+
 
 #### Use HTTPS instead of HTTP
 
@@ -68,14 +76,6 @@ The API has no concept of which timezone the user may be in. All times are retur
 
 Each API request should be logged. You could simply insert rows into some `Log` table cooresponding to each request. However perhaps a better option is CloudWatch because IAM policies can be set up so that the log is 'write-only'. Requests can be written but not updated or deleted. Alerts can be set up against the log metrics for things such as high error rates, high invalid logins, high volume of messages sent to/from a single user, etc.
 
-
-#### The API lacks security
-
-Anyone can view everyone else's messages as well as a list of all other users. Anyone can send a message from and to any user because "POST send_messages.php" does not authenticate whether someone has actually logged in.
-
-There are a number of options here. Each endpoint could be sucured using Basic Auth, Digest Auth, or OAuth. Or perhaps the "POST /login" response should include a token that can be used on subsequent calls to ensure the user can only see messages and send using their own account.
-
-Finally all calls should require HTTPS (but this was already mentiond above.)
 
 
 #### Use UUIDs for “user_id”
