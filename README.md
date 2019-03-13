@@ -24,7 +24,7 @@ My steps were as follows:
 - Test using browser and PostMan
 - Set up git repository, deployment keys
 
-The whole thing took about 5 hours.
+The whole thing took about 5 hours over Monday and Tuesday night of this week.
 
 I spent about 3 hours writing the code and testing with the remainder of the time setting up the DEV environment, documenting everything, and writing this readme.
 
@@ -60,6 +60,7 @@ There are a number of options here. Each endpoint could be sucured using Basic A
 
 ... rather than simply a auto incrementing number that is easy for someone to guess.
 
+
 #### If I were designing this API I would:
 
 - lock down the API so only those who were issued credentials could use it
@@ -83,5 +84,12 @@ Raw Body:
 
 #### Consider DynamoDB 
 
-Considuer using DynamoDB (or other non-SQL database) rather than MySQL. This seems like a good fit for this because even if there are millions of users, each User would generally have a limited number of other Users they message to and from. This creates a large key space and would vertically scale nicely.
+Considuer using DynamoDB (or other non-SQL database) rather than MySQL. This seems like a good fit for this because even if there are millions of users, each User would generally have a limited number of other Users they message to and from. This creates a large key space and would vertically scale nicely. The downside is that once DynamoDB is chosen you become locked into using AWS and it is difficult to move to another provider.
+
+
+#### Conclusion
+
+There are many other things that are probably missing from this API such as the ability to group users together (friends, channels, etc.), the ability to upload avatar images, profile bios, current status, etc.
+
+Microservices such as this could also be implemented serverless using AWS API Gateway and Lamba, but then using PHP may not be an option.
 
