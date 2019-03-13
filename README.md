@@ -5,7 +5,7 @@
 ### bjruddock@gmail.com
 ### (973) 714-7249
 
-Included in this repository is the my solution for the “Backend Developer Test”.  No frameworks or any libraries were used.
+Included in this repository is the my solution for the “Backend Developer Test”.  No frameworks or any external libraries were used.
 
 The only minor change I made was to *require* an HTTPS connection. Trying to access the endpoint using HTTP will result in a 301 redirect to HTTPS.
 
