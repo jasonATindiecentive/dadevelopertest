@@ -27,7 +27,8 @@ CREATE TABLE `Log` (
   `request` mediumtext,
   `reply` mediumtext,
   `ts` datetime DEFAULT NULL,
-  `method` varchar(15) DEFAULT NULL
+  `method` varchar(15) DEFAULT NULL,
+  KEY `kyLogSearch` (`ts`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -103,4 +104,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-13 16:31:17
+-- Dump completed on 2019-03-13 16:33:20
