@@ -42,7 +42,7 @@ I spent about 3 hours writing the code and testing with the remainder of the tim
 Some issues with structure and security that I came across are as follows:
 
 Use HTTPS instead of HTTP
-Well, actually I already did this. All requests my my urls redirect to https.
+Well, actually I already did this. All requests urls redirect to https.
 
 Use a pre-existing library or framework such as CI or Laravel
 These either have built in REST servers or libraries are readily available. Even if a framework is not used then there are also available straight PHP libraries that could be utilized.
