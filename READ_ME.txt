@@ -13,6 +13,8 @@ The endpoints can be found live at: https://datechdev.jasonruddock.com/api/
 
 For example, https://datechdev.jasonruddock.com/api/list_all_users.php?requester_user_id=1
 
+All errors return HTTP 500 plus an code and description. Possible errors are: 000 Internal Server Error 100 Method not allowed 200 Email Address is not Valid 201 Password is empty 202 First Name is required 203 Last Name is required 204 User Already Exists 102 Invalid Login 103 user_id_X was not found 105 sender_user_id was not found 106 receiver_user_id was not found 107 requester_user_id was not found
+
 My steps were as follows:
 
 Design Database Diagram
