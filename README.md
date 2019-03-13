@@ -7,6 +7,12 @@
 
 Included in this repository is the my solution for the “Backend Developer Test”. No frameworks or any libraries were used.
 
+The endpoints can be found live at:
+https://datechdev.jasonruddock.com/api/
+
+For example, https://datechdev.jasonruddock.com/api/list_all_users.php?requester_user_id=1
+
+
 My steps were as follows:
 
 - Design Database Diagram
@@ -15,13 +21,14 @@ My steps were as follows:
 - Write code using PHP Storm and FTPing into my Dev Instance
 - Set up git repository, deployment keys
 
-
-I spent about 3 hours writing the code with the remainder of the time setting up the DEV environment.
-
-
+I spent about 3 hours writing the code with the remainder of the time setting up the DEV environment, documenting everything, and writing this readme.
 
 Some issues with structure and security that I came across are as follows:
 
+
+#### Use HTTPS instead of HTTP
+
+Well, actually I already did this. All requests my my urls redirect to https.
 
 #### Use a framework such as CI or Laravel
 
