@@ -14,7 +14,7 @@ https://datechdev.jasonruddock.com/api/
 
 For example, https://datechdev.jasonruddock.com/api/list_all_users.php?requester_user_id=1
 
-All errors return HTTP 500 plus an code and description. Possible errors are:
+All errors return HTTP 500 plus a code and description. Possible errors are:
 - 000 Internal Server Error
 - 100 Method not allowed
 - 200 Email Address is not Valid
