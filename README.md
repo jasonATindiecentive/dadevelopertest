@@ -93,5 +93,5 @@ Considuer using DynamoDB (or other non-SQL database) rather than MySQL. This see
 
 There are many other things that are probably missing from this API such as the ability to group users together (friends, channels, etc.), the ability to upload avatar images, profile bios, current status, etc.
 
-Microservices such as this could also be implemented serverless using AWS API Gateway and Lamba, but then using PHP may not be an option.
+Microservices such as this could also be implemented serverless using AWS API Gateway and Lamba, but then using PHP may not be an option and, again, you become locked to AWS.
 
