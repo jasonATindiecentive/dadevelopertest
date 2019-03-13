@@ -7,6 +7,8 @@
 
 Included in this repository is the my solution for the “Backend Developer Test”. No frameworks or any libraries were used.
 
+The only minor change I made was to *require* an HTTPS connection. Trying to access the endpoint using HTTP will result in a 301 redirect to HTTPS.
+
 The endpoints can be found live at:
 https://datechdev.jasonruddock.com/api/
 
@@ -30,18 +32,25 @@ Some issues with structure and security that I came across are as follows:
 
 Well, actually I already did this. All requests my my urls redirect to https.
 
-#### Use a framework such as CI or Laravel
+#### Use a pre-existing library or framework such as CI or Laravel
 
 These either have built in REST servers or libraries are readily available. Even if a framework is not used then there are also available straight PHP libraries that could be utilized.
 
+It's not really necessary for a simple example like this. However, when you try to add functionality such as more integrations, emails, jobs, etc. then a framework or at least libraries may come in quite useful.
 
-#### The API lacks security.
+For example I could envision a future version of this that, rather than having the 'send_messages.php' endpoint insert into the database inline it would queue the request and have a worker process pull them off the queue and handle the processing. If someone hasn't read their messasges in, say, a few days, maybe we would send an email to that user.
 
-I usually have a method like a “POST /auth” that would accept credentials and then return some kind of token which can be used on subsequent calls. The subsequent calls can limit access to data based on the credentials supplied. Alternatively Basic Auth, Digest Auth, or OAuth could be used, etc.
 
-For example, on the current version of this API one could simply call “list_all_users.php” and be able to easily retrieve a list of all other users. Revealing even someone’s email address and name would be considered a security issue, plus anyone can spam users with unsolicited messages via the API.
+### Add logging
 
- If access to the API were restricted to only authorized users who were issued credentials then this could be avoided.
+Each API request should be logged. You could simply insert rows into some `Log` table cooresponding to each request. However perhaps a better option is CloudWatch because IAM policies can be set up so that the log is 'write-only'. Requests can be written but not updated or deleted. Alerts can be set up against the log metrics for things such as high error rates, high invalid logins, high volume of messages sent to/from a single user, etc.
+
+
+#### The API lacks security
+
+Anyone can view everyone else's messages as well as a list of all other users. Anyone can send a message from and to any user because "POST send_messages.php" does not authenticate whether someone has actually logged in.
+
+There are a number of options here. Each endpoint could be sucured using Basic Auth, Digest Auth, or OAuth. Or perhaps the "POST /login" response should include a token that can be used on subsequent calls to ensure the user can only see messages and send using their own account.
 
 
 #### Use UUIDs for “user_id”
@@ -63,14 +72,13 @@ GET /api/list_all_users/{requestor_user_id}
 POST /api/login
 Header: Content-Type: application/json
 Header: Authorization Bearer {token from /auth}
-Body:
+Raw Body:
 { “email”: “info@datatechnologies.com”,”password”:”Test123”}
 ```
-
-Even without using a framework some improvement can be made to this codebase to add basic routing controllers that would make it much easier to add additional methods.
+- Use off the shelf libraries or a framework
 
 
 #### Consider DynamoDB 
 
-Considuer using DynamoDB (or other non-SQL database) rather than MySQL. This seems like a good fit for this because even if there are millions of users, each User would generally have a limited number of messages sent to and from other users. This would vertically scale nicely and could support a virtually unlimited amount of traffic.
+Considuer using DynamoDB (or other non-SQL database) rather than MySQL. This seems like a good fit for this because even if there are millions of users, each User would generally have a limited number of other Users they message to and from. This creates a large key space and would vertically scale nicely.
 
