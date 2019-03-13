@@ -1,7 +1,6 @@
 (note, this file contains the same text as README.md)
 
 dadevelopertest
-
 Developer Test for D & A Technologies
 Jason Ruddock
 bjruddock@gmail.com
@@ -38,6 +37,11 @@ When you try to add functionality such as more integrations, emails, jobs, etc. 
 
 For example I could envision a future version of this that, rather than having the 'send_messages.php' endpoint insert into the database inline it would queue the request and have a worker process pull them off the queue and handle the processing. If someone hasn't read their messasges in, say, a few days, maybe we would send an email to that user. We might send welcome emails, etc. etc.
 
+Timezones are ignored
+The API has no concept of which timezone the user may be in. All times are returned in GMT. Perhaps a user signing up should supply their timezone or location so times can be converted in the reply.
+
+... or, perhaps this is a non-issue and would be handled on the client side.
+
 Add logging
 Each API request should be logged. You could simply insert rows into some Log table cooresponding to each request. However perhaps a better option is CloudWatch because IAM policies can be set up so that the log is 'write-only'. Requests can be written but not updated or deleted. Alerts can be set up against the log metrics for things such as high error rates, high invalid logins, high volume of messages sent to/from a single user, etc.
 
@@ -45,6 +49,8 @@ The API lacks security
 Anyone can view everyone else's messages as well as a list of all other users. Anyone can send a message from and to any user because "POST send_messages.php" does not authenticate whether someone has actually logged in.
 
 There are a number of options here. Each endpoint could be sucured using Basic Auth, Digest Auth, or OAuth. Or perhaps the "POST /login" response should include a token that can be used on subsequent calls to ensure the user can only see messages and send using their own account.
+
+Finally all calls should require HTTPS (but this was already mentiond above.)
 
 Use UUIDs for “user_id”
 ... rather than simply a auto incrementing number that is easy for someone to guess.
