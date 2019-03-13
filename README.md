@@ -103,7 +103,7 @@ Raw Body:
 
 #### Consider DynamoDB 
 
-Considuer using DynamoDB (or other non-SQL database) rather than MySQL. This seems like a good fit for this because even if there are millions of users, each User would generally have a limited number of other Users they message to and from. This creates a large key space and would vertically scale nicely. The downside is that once DynamoDB is chosen you become locked into using AWS and it is difficult to move to another provider.
+Considuer using DynamoDB (or other non-SQL database) rather than MySQL. This seems like a good fit for this because even if there are millions of users, each User would generally have a relatively small number of other Users they message to and from. This creates a nicely distributed key space and would vertically scale nicely. The downside is that once DynamoDB is chosen you become locked into using AWS and it is difficult to move to another provider.
 
 
 #### Conclusion
