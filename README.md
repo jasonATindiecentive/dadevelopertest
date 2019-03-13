@@ -50,8 +50,6 @@ Anyone can view everyone else's messages as well as a list of all other users. A
 
 There are a number of options here. Each endpoint could be sucured using Basic Auth, Digest Auth, or OAuth. Or perhaps the "POST /login" response should include a token that can be used on subsequent calls to ensure the user can only see messages and send using their own account.
 
-Finally all calls should require HTTPS (but this was already mentiond above.)
-
 
 #### Use HTTPS instead of HTTP
 
@@ -105,7 +103,7 @@ Raw Body:
 
 #### Consider DynamoDB 
 
-Considuer using DynamoDB (or other non-SQL database) rather than MySQL. This seems like a good fit for this because even if there are millions of users, each User would generally have a limited number of other Users they message to and from. This creates a large key space and would vertically scale nicely. The downside is that once DynamoDB is chosen you become locked into using AWS and it is difficult to move to another provider.
+Considuer using DynamoDB (or other non-SQL database) rather than MySQL. This seems like a good fit for this because even if there are millions of users, each User would generally have a relatively small number of other Users they message to and from. This creates a nicely distributed key space and would vertically scale nicely. The downside is that once DynamoDB is chosen you become locked into using AWS and it is difficult to move to another provider.
 
 
 #### Conclusion
