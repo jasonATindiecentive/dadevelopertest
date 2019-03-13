@@ -13,9 +13,8 @@ The endpoints can be found live at: https://datechdev.jasonruddock.com/api/
 
 For example, https://datechdev.jasonruddock.com/api/list_all_users.php?requester_user_id=1
 
-All errors return HTTP 500 plus an code and description.
+All errors return HTTP 500 plus an code and description. Possible errors are:
 
-Possible errors are:
 000 Internal Server Error
 100 Method not allowed
 200 Email Address is not Valid
@@ -28,7 +27,6 @@ Possible errors are:
 105 sender_user_id was not found
 106 receiver_user_id was not found
 107 requester_user_id was not found
-
 My steps were as follows:
 
 Design Database Diagram
@@ -91,9 +89,9 @@ There are many other things that are probably missing from this API such as the 
 
 Microservices such as this could also be implemented serverless using AWS API Gateway and Lamba, but then using PHP may not be an option and, again, you become locked to AWS.
 
-If I were to put more time into this there are some improvements I might make even using the current requirements. Perhaps adding a basic routing framework to make it easier to add and modify api endpoints, defining the list of errors in one place, abd adding logging. However, sometimes there is value in getting something done rather than getting it absolutely perfect.
+If I were to put more time into this there are some improvements I might make even using the current requirements. Perhaps adding a basic routing framework to make it easier to add and modify api endpoints, defining the list of errors in one place, and adding logging. However, sometimes there is value in getting something completed rather than getting it absolutely perfect.
 
-This was quite an interesting test. It was fun setting this up and quite interesting to do without any framework or libraries.
+This was quite an interesting test. It was fun setting this up doing it all without any framework or libraries.
 
 Thanks!
 
