@@ -2,7 +2,21 @@
 /*
  * API Endpoint: send a message
  *
- * POST /api/send_messagee/
+ * POST /api/send_message/
+ *
+ * Sends a message from one user to another. Returns a success code if the message was sent successfully.
+ *
+ * Example request:
+ * {
+ * “sender_user_id”: 1, “receiver_user_id”: 2, “message” : “Example text”
+ * }
+ *
+ * Example reply:
+ * {
+ * “success_code” : “200”, “success_title” : “Message Sent”, “success_message”: “Message was
+ * sent successfully” }
+ *
+ *
  *
  *
  */
@@ -15,7 +29,7 @@ include_once(dirname(__FILE__) . "/../../application/autoload.php");
 // only POST alloaed
 if ($_SERVER['REQUEST_METHOD'] <> 'POST') {
     header("HTTP/1.1 500 Method not Allowed");
-    $o = new clsApiError("500", "Error", "Method not Allowed");
+    $o = new clsApiError("500", "100", "Method not Allowed");
     echo $o->toJson();
     exit;
 }
@@ -24,7 +38,7 @@ if (
     !isset($_POST['receiver_user_id']) ||
     !isset($_POST['message'])
 ) {
-    $o = new clsApiError("500", "Error", "Some of the Required Params were not passed to this script!");
+    $o = new clsApiError("500", "101", "Some of the Required Params were not passed to this script!");
     $o->browserErrror();
     exit;
 }

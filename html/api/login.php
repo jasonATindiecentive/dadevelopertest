@@ -6,13 +6,17 @@
  *
  * hanles a login request from the user. If the login was unsuccesful, an approprate error response is returned.
  *
- * "users":[
+ *
+ * Example request:
  * {
- * "user_id":1, "email":"ppeck@datechnologies.co", "first_name":"Preston", "last_name":"Peck"
- * }, {
- * "user_id":2, "email":"jgreen@datechnologies.co", "first_name":"Jake ",
- * "last_name":"Green" }
- * ] }
+ * “email”:”info@datechnologies.co”, “password”:”Test123”
+ * }
+ *
+ * Example response:
+ * {
+ * “user_id”:1, “email”:” info@datechnologies.co ”, “first_name”:”John”, “last_name”:”Doe”
+ * }
+ *
  *
  */
 
@@ -23,7 +27,7 @@ include_once(dirname(__FILE__) . "/../application/autoload.php");
 
 // only GET alloaed
 if ($_SERVER['REQUEST_METHOD'] <> 'POST') {
-    $o = new clsApiError("500", "Error", "Method not Allowed");
+    $o = new clsApiError("500", "100", "Method not Allowed");
     $o->browserErrror();
     exit;
 }
@@ -33,7 +37,7 @@ if (
     !isset($_POST['email']) ||
     !isset($_POST['password'])
 ) {
-    $o = new clsApiError("500", "Error", "Some of the Required Params were not passed to this script!");
+    $o = new clsApiError("500", "101", "Some of the Required Params were not passed to this script!");
     $o->browserErrror();
     exit;
 }

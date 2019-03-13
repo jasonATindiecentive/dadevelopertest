@@ -7,6 +7,8 @@
  * Implements the methods described in the D&A Technologies Backend Developer Test
  *
  *
+ *
+ *
  * Jason Ruddock
  *
  * Created 3/11/19 for Developer Test
@@ -35,7 +37,7 @@ class clsApi {
         // connect to database
         $this->db = @new \mysqli(DB_ENDPOINT, DB_USERNAME, DB_PASSWORD, DB_NAME);
         if ($this->db->connect_errno <> 0) {
-            throw new clsApiError(500, "Error", "Internal Server Error");
+            throw new clsApiError(500, "000", "Internal Server Error");
         }
     }
 
@@ -104,7 +106,7 @@ class clsApi {
             $stmt->execute();
 
         } catch (Exception $e) {
-            throw new clsApiError(500, "Error", "Internal Server Error");
+            throw new clsApiError(500, "000", "Internal Server Error");
         }
 
         $r->user_id = $stmt->insert_id;
@@ -159,10 +161,10 @@ class clsApi {
                 $r->first_name = $user['first_name'];
                 $r->last_name = $user['last_name'];
             } else {
-                throw new clsApiError(500, "Error", "Invalid Login");
+                throw new clsApiError(500, "102", "Invalid Login");
             }
         } catch (Exception $e) {
-            throw new clsApiError(500, "Error", "Internal Server Error");
+            throw new clsApiError(500, "000", "Internal Server Error");
         }
 
         return json_encode($r);
@@ -194,10 +196,10 @@ class clsApi {
             // validate
             $check = $this->getUser($user_id_a);
             if ($check === NULL)
-                throw new clsApiError(500, "Error", "user_id_1 was not found");
+                throw new clsApiError(500, "103", "user_id_1 was not found");
             $check = $this->getUser($user_id_b);
             if ($check === NULL)
-                throw new clsApiError(500, "Error", "user_id_2 was not found");
+                throw new clsApiError(500, "104", "user_id_2 was not found");
 
             // all good, send the message
             $sql = "SELECT * FROM `Message` WHERE 
@@ -220,7 +222,7 @@ class clsApi {
             }
 
         } catch (Exception $e) {
-            throw new clsApiError(500, "Error", "Internal Server Error");
+            throw new clsApiError(500, "000", "Internal Server Error");
         }
 
         // success
@@ -253,10 +255,10 @@ class clsApi {
             // validate
             $fromUser = $this->getUser($sender_user_id);
             if ($fromUser === NULL)
-                throw new clsApiError(500, "Error", "sender_user_id was not found");
+                throw new clsApiError(500, "105", "sender_user_id was not found");
             $toUser = $this->getUser($receiver_user_id);
             if ($toUser === NULL)
-                throw new clsApiError(500, "Error", "receiver_user_id was not found");
+                throw new clsApiError(500, "106", "receiver_user_id was not found");
 
             // all good, send the message
             $sql = "INSERT INTO `Message` SET 
@@ -270,7 +272,7 @@ class clsApi {
             $stmt->execute();
 
         } catch (Exception $e) {
-            throw new clsApiError(500, "Error", "Internal Server Error");
+            throw new clsApiError(500, "000", "Internal Server Error");
         }
 
         // success
@@ -313,9 +315,9 @@ class clsApi {
         // is this a valid user?
         $check = $this->getUser($requester_user_id);
         if ($check === NULL)
-            throw new clsApiError(500, "Error", "requester_user_id was not found");
+            throw new clsApiError(500, "107", "requester_user_id was not found");
 
-
+        // fetch all other users besides this one
         try {
             $sql = " SELECT * FROM `User` WHERE
                     `User`.idUser <> ?";
@@ -333,7 +335,7 @@ class clsApi {
                 $r->users[] = $o; // add to return array of objects
             }
         } catch (Exception $e) {
-            throw new clsApiError(500, "Error", "Internal Server Error");
+            throw new clsApiError(500, "000", "Internal Server Error");
         }
         return json_encode($r);
     }
@@ -360,7 +362,7 @@ class clsApi {
             else
                 return NULL;
         } catch (Exception $e) {
-            throw new clsApiError(500, "Error", "Internal Server Error");
+            throw new clsApiError(500, "000", "Internal Server Error");
         }
         return json_encode($r);
     }

@@ -4,7 +4,13 @@
  *
  * GET /api/list_all_users/
  *
- * returns JSON list of all users e.g.:
+ * Displays all of the users that have registered to use the app excluding the requester.
+ *
+ *
+ * Example request:
+ * {
+ * “requester_user_id”: 3
+ * }
  *
  * "users":[
  * {
@@ -23,13 +29,13 @@ include_once(dirname(__FILE__) . "/../application/autoload.php");
 
 // only GET method is allowed
 if ($_SERVER['REQUEST_METHOD'] <> 'GET') {
-    $o = new clsApiError("500", "Error", "Method not Allowed");
+    $o = new clsApiError("500", "100", "Method not Allowed");
     $o->browserErrror();
     exit;
 }
 // collect parameters
 if (!isset($_GET['requester_user_id'])) {
-    $o = new clsApiError("500", "Error", "Some of the Required Params were not passed to this script!");
+    $o = new clsApiError("500", "101", "Some of the Required Params were not passed to this script!");
     $o->browserErrror();
     exit;
 }

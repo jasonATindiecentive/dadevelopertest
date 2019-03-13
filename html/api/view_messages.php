@@ -4,15 +4,24 @@
  *
  * GET /api/view_messages/
  *
- * returns JSON list of all users e.g.:
+ * Returns all messages that these two users have sent to each other in date order.
  *
- * "users":[
+ *
+ * Example request:
  * {
- * "user_id":1, "email":"ppeck@datechnologies.co", "first_name":"Preston", "last_name":"Peck"
+ * "user_id_a": "1", "user_id_b": "2"
+ * }
+ *
+ * Example reply:
+ * {
+ * "messages":[
+ * {
+ * "message_id":1, "sender_user_id":1, "message":"Hey what is up?", "epoch":1429220026
  * }, {
- * "user_id":2, "email":"jgreen@datechnologies.co", "first_name":"Jake ",
- * "last_name":"Green" }
+ * "message_id":2, "sender_user_id":1, "message":"Hey what is up?", "epoch":1429320028
+ * }
  * ] }
+ *
  *
  */
 
@@ -23,7 +32,7 @@ include_once(dirname(__FILE__) . "/../../application/autoload.php");
 
 // only GET alloaed
 if ($_SERVER['REQUEST_METHOD'] <> 'GET') {
-    $o = new clsApiError("500", "Error", "Method not Allowed");
+    $o = new clsApiError("500", "100", "Method not Allowed");
     $o->browserErrror();
     exit;
 }
@@ -33,7 +42,7 @@ if (
     !isset($_GET['user_id_a']) ||
     !isset($_GET['user_id_b'])
 ) {
-    $o = new clsApiError("500", "Error", "Some of the Required Params were not passed to this script!");
+    $o = new clsApiError("500", "101", "Some of the Required Params were not passed to this script!");
     $o->browserErrror();
     exit;
 }

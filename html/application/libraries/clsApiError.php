@@ -3,7 +3,8 @@
  *
  * clsApiError.php
  *
- * Implements the methods described in the D&A Technologies Backend Developer Test
+ * Implements an error handler to construct and handle errors as described in the D&A Technologies Backend
+ * Devloper Test
  *
  *
  * Jason Ruddock
