@@ -45,6 +45,13 @@ When you try to add functionality such as more integrations, emails, jobs, etc. 
 For example I could envision a future version of this that, rather than having the 'send_messages.php' endpoint insert into the database inline it would queue the request and have a worker process pull them off the queue and handle the processing. If someone hasn't read their messasges in, say, a few days, maybe we would send an email to that user. We might send welcome emails, etc. etc.
 
 
+#### Timezones are ignored
+
+The API has no concept of which timezone the user may be in. All times are returned in GMT. Perhaps a user signing up should supply their timezone or location so times can be converted.
+
+... or, perhaps this is a non-issue and would be handled on the client side.
+
+
 #### Add logging
 
 Each API request should be logged. You could simply insert rows into some `Log` table cooresponding to each request. However perhaps a better option is CloudWatch because IAM policies can be set up so that the log is 'write-only'. Requests can be written but not updated or deleted. Alerts can be set up against the log metrics for things such as high error rates, high invalid logins, high volume of messages sent to/from a single user, etc.
