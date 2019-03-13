@@ -392,20 +392,36 @@ class clsApi {
      * @param string   reply
      * @return array fields from User table or NULL if isUser is not found
      *
+     *
+     *
+     *
      */
-    protected function log($method, $request, $reply) {
+    protected function log($method, $request, $reply, $ip = NULL) {
+
         if (is_object($reply)) $reply = json_encode($reply);
+
+        // if IP was not passed in then determine it
+        if ($ip === NULL) {
+            // if AWS ALB or CF is used then get the IP a different way
+            if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                $a = explode(",",$_SERVER['HTTP_X_FORWARDED_FOR']);
+                $ip = $a[0];
+                // note, other CDNS or environments like CloudFlare may do this differently
+            } else {
+                $ip = $_SERVER['REMOTE_ADDR'];
+            }
+        }
         try {
             $sql = "
                 INSERT INTO `Log` SET  
-                  idUser = ?,
                   method = ?,
                   request = ?,
                   reply = ?,
+                  ip = ?,
                   ts = NOW()
             ";
             $stmt = $this->db->prepare($sql);
-            $stmt->bind_param("isss", $idUser, $method, $request, $reply);
+            $stmt->bind_param("ssss", $method, $request, $reply, $ip);
             $stmt->execute();
 
             // TODO: expire old log entries?
