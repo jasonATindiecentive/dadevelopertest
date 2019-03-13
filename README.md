@@ -1,12 +1,11 @@
 # dadevelopertest
-Developer Test for D &amp; A Technologies
+## Developer Test for D &amp; A Technologies
 
-Jason Ruddock
-bjruddock@gmail.com
-(973) 714-7249
+###Jason Ruddock
+###bjruddock@gmail.com
+###(973) 714-7249
 
 Included in this repository is the my solution for the “Backend Developer Test”. No frameworks or any libraries were used.
-
 
 My steps were as follows:
 
@@ -29,11 +28,11 @@ Some issues with structure and security that I came across are as follows:
 
 2) The API lacks security.
 
-I usually have a method like a “POST /auth” that would accept credentials and then return some kind of token which can be used on subsequent calls. The subsequent calls can limit access to data based on the credentials supplied. Alternatively Basic Auth, Digest Auth, or OAuth could be used, etc.
+ I usually have a method like a “POST /auth” that would accept credentials and then return some kind of token which can be used on subsequent calls. The subsequent calls can limit access to data based on the credentials supplied. Alternatively Basic Auth, Digest Auth, or OAuth could be used, etc.
 
-For example, on the current version of this API one could simply call “list_all_users.php” and be able to easily retrieve a list of all other users. Revealing even someone’s email address and name would be considered a security issue, plus anyone can spam users with unsolicited messages via the API.
+ For example, on the current version of this API one could simply call “list_all_users.php” and be able to easily retrieve a list of all other users. Revealing even someone’s email address and name would be considered a security issue, plus anyone can spam users with unsolicited messages via the API.
 
-If access to the API were restricted to only authorized users who were issued credentials then this could be avoided.
+ If access to the API were restricted to only authorized users who were issued credentials then this could be avoided.
 
 
 3) It’s better to use UUIDs for “user_id” rather than simply a auto incrementing number that is easy for someone to guess.
@@ -44,18 +43,21 @@ If access to the API were restricted to only authorized users who were issued cr
 - lock down the API so only those who were issued credentials could use it
 - remove “.php” from all endpoints
 - replace GET parameters with paths, for example:
+```
 GET /api/view_messages/{user_id_a}/{user_id_b}
 GET /api/list_all_users/{requestor_user_id}
+```
 
 - all POST would accept raw JSON rather than form-data, for example:
+```
 POST /api/login
 Header: Content-Type: application/json
 Header: Authorization Bearer {token from /auth}
 Body:
 { “email”: “info@datatechnologies.com”,”password”:”Test123”}
+```
 
-
-Even without using a framework some improvement can be made to this codebase to add basic routing controllers that would make it much easier to add additional methods.
+ Even without using a framework some improvement can be made to this codebase to add basic routing controllers that would make it much easier to add additional methods.
 
 
 
