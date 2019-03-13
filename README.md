@@ -47,7 +47,7 @@ Some issues with structure and security that I came across are as follows:
 
 #### Use HTTPS instead of HTTP
 
-Well, actually I already did this. All requests my my urls redirect to https.
+Well, actually I already did this. All requests urls redirect to https.
 
 
 #### Use a pre-existing library or framework such as CI or Laravel
