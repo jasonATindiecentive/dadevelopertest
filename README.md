@@ -21,9 +21,12 @@ My steps were as follows:
 - Set up AWS VPC, Dev instance with Apache, PHP71, and VSFPT, set up Aurora Server-less Instance
 - Create tables using command console
 - Write code using PHP Storm and FTPing into my Dev Instance
+- Test using browser and PostMan
 - Set up git repository, deployment keys
 
-I spent about 3 hours writing the code with the remainder of the time setting up the DEV environment, documenting everything, and writing this readme.
+The whole thing took about 5 hours.
+
+I spent about 3 hours writing the code and testing with the remainder of the time setting up the DEV environment, documenting everything, and writing this readme.
 
 Some issues with structure and security that I came across are as follows:
 
