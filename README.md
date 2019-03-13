@@ -40,9 +40,9 @@ Well, actually I already did this. All requests my my urls redirect to https.
 
 These either have built in REST servers or libraries are readily available. Even if a framework is not used then there are also available straight PHP libraries that could be utilized.
 
-It's not really necessary for a simple example like this. However, when you try to add functionality such as more integrations, emails, jobs, etc. then a framework or at least libraries may come in quite useful.
+When you try to add functionality such as more integrations, emails, jobs, etc. then a framework or at least libraries may come in quite useful.
 
-For example I could envision a future version of this that, rather than having the 'send_messages.php' endpoint insert into the database inline it would queue the request and have a worker process pull them off the queue and handle the processing. If someone hasn't read their messasges in, say, a few days, maybe we would send an email to that user.
+For example I could envision a future version of this that, rather than having the 'send_messages.php' endpoint insert into the database inline it would queue the request and have a worker process pull them off the queue and handle the processing. If someone hasn't read their messasges in, say, a few days, maybe we would send an email to that user. We might send welcome emails, etc. etc.
 
 
 #### Add logging
