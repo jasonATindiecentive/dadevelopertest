@@ -56,8 +56,6 @@ These either have built in REST servers or libraries are readily available. Even
 
 When you try to add functionality such as more integrations, emails, jobs, etc. then a framework or at least libraries may come in quite useful.
 
-For example I could envision a future version of this that, rather than having the 'send_messages.php' endpoint insert into the database inline it would queue the request and have a worker process pull them off the queue and handle the processing. If someone hasn't read their messasges in, say, a few days, maybe we would send an email to that user. We might send welcome emails, etc. etc.
-
 
 #### Timezones are ignored
 
