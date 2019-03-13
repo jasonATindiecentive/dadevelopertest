@@ -116,7 +116,7 @@ There are many other things that are probably missing from this API such as the 
 
 Microservices such as this could also be implemented serverless using AWS API Gateway and Lamba, but then using PHP may not be an option and, again, you become locked to AWS.
 
-If I were to put more time into this there are some improvements I might make even using the current requirements. Perhaps adding a basic routing framework to make it easier to add and modify api endpoints, defining the list of errors in one place, and adding logging. However, sometimes there is value in getting something completed rather than getting it absolutely perfect.
+If I were to put more time into this there are some improvements I might make even using the current requirements. Perhaps adding a basic routing framework to make it easier to add and modify api endpoints, defining the list of errors in one place, and adding more logging. 
 
 This was quite an interesting test. It was fun setting this up doing it all without any framework or libraries.
 
