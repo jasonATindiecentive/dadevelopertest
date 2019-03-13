@@ -30,7 +30,7 @@ include_once(dirname(__FILE__) . "/../application/autoload.php");
 if ($_SERVER['REQUEST_METHOD'] <> 'POST') {
     header("HTTP/1.1 500 Method not Allowed");
     $o = new clsApiError("500", "100", "Method not Allowed");
-    echo $o->toJson();
+    $o->browserErrror();
     exit;
 }
 if (

@@ -24,7 +24,7 @@
 use DaTechDevTest\Api\clsApi;
 use DaTechDevTest\Api\clsApiError;
 
-include_once(dirname(__FILE__) . "/../../application/autoload.php");
+include_once(dirname(__FILE__) . "/../application/autoload.php");
 
 // only POST alloaed
 if ($_SERVER['REQUEST_METHOD'] <> 'POST') {
