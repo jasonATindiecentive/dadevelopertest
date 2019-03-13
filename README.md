@@ -35,6 +35,7 @@ Some issues with structure and security that I came across are as follows:
 
 Well, actually I already did this. All requests my my urls redirect to https.
 
+
 #### Use a pre-existing library or framework such as CI or Laravel
 
 These either have built in REST servers or libraries are readily available. Even if a framework is not used then there are also available straight PHP libraries that could be utilized.
@@ -44,7 +45,7 @@ It's not really necessary for a simple example like this. However, when you try 
 For example I could envision a future version of this that, rather than having the 'send_messages.php' endpoint insert into the database inline it would queue the request and have a worker process pull them off the queue and handle the processing. If someone hasn't read their messasges in, say, a few days, maybe we would send an email to that user.
 
 
-### Add logging
+#### Add logging
 
 Each API request should be logged. You could simply insert rows into some `Log` table cooresponding to each request. However perhaps a better option is CloudWatch because IAM policies can be set up so that the log is 'write-only'. Requests can be written but not updated or deleted. Alerts can be set up against the log metrics for things such as high error rates, high invalid logins, high volume of messages sent to/from a single user, etc.
 
@@ -65,6 +66,7 @@ There are a number of options here. Each endpoint could be sucured using Basic A
 
 - lock down the API so only those who were issued credentials could use it
 - remove “.php” from all endpoints
+- add API request logging via CloudWatch
 - replace GET parameters with paths, for example:
 ```
 GET /api/view_messages/{user_id_a}/{user_id_b}
