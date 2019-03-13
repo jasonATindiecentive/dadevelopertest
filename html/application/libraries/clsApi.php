@@ -387,10 +387,10 @@ class clsApi {
      *
      * Add log entries
      *
-     * @param int   idUser
-     * @param string   request
+     * @param string   method
+     * @param string   request (leave null to pull from get or post)
      * @param string   reply
-     * @return array fields from User table or NULL if isUser is not found
+     * @param string   ip (leave null to pull from headers)
      *
      *
      *
