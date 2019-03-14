@@ -32,7 +32,7 @@ include_once(dirname(__FILE__) . "/../application/autoload.php");
 
 // only GET alloaed
 if ($_SERVER['REQUEST_METHOD'] <> 'GET') {
-    $o = new clsApiError("500", "100", "Method not Allowed");
+    $o = new clsApiError("405", "100", "Method not Allowed");
     $o->browserErrror();
     exit;
 }
